@@ -1,21 +1,32 @@
 package com.threadedsquaresolver;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class App extends Application
 {
+
+    private static Scene scene;
+
     @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        Scene scene = new Scene(new StackPane(l), 640, 480);
+    public void start(Stage stage) throws IOException{
+        scene = new Scene(loadFXML("/fxml/hello"));
+        stage.setTitle("Threaded Square Solver");
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("/img/logo.png")));
         stage.show();
+    }
+
+    private Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
     }
 
     public static void main(String[] args) {
