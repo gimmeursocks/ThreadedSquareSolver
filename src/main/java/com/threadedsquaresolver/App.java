@@ -8,18 +8,17 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class App extends Application
-{
+public class App extends Application {
 
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException{
-        scene = new Scene(loadFXML("/fxml/hello"));
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("/fxml/hello"), 800, 600);
         stage.setTitle("Threaded Square Solver");
         stage.setScene(scene);
         stage.setResizable(false);
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("/img/logo.png")));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
         stage.show();
     }
 
