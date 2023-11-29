@@ -11,8 +11,18 @@ public class SolverTest {
         toSolve.add(new LShape());
         toSolve.add(new IShape());
         toSolve.add(new JShape());
+        // toSolve.add(new IShape());
+        // toSolve.add(new IShape());
+        // toSolve.add(new IShape());
+        // toSolve.add(new IShape());
 
         ThreadMaker tm = new ThreadMaker(toSolve);
-        System.out.println(tm.toString());
+
+        for (TetrisBoard board : tm.solutionList) {
+            for (TetrisShape shape : board.getArrayList()) {
+                System.out.print(shape.getClass().getSimpleName()+" "+shape.getCurrentOrientation()+"\n");
+            }
+            System.out.println("///////////////");
+        }
     }
 }
