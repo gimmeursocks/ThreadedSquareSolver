@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class App extends Application {
 
@@ -14,12 +16,25 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("/fxml/hello"), 800, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/hello.fxml"));
+        Parent root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+
+
+
+        scene = new Scene(loadFXML("/fxml/hello"));
         stage.setTitle("Threaded Square Solver");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+
+
+
         stage.show();
+
+
+
+
     }
 
     private Parent loadFXML(String fxml) throws IOException {
