@@ -20,4 +20,6 @@ public class IShape extends TetrisShape {
     public int getMaxRotations() {
         return 2;
     }
+
+    
 }

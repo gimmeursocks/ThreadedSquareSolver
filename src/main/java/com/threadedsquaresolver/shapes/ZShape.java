@@ -21,4 +21,8 @@ public class ZShape extends TetrisShape {
     public int getMaxRotations() {
         return 2;
     }
+
+    public ZShape createNewInstance(int orientation) {
+        return new ZShape(orientation);
+    }
 }

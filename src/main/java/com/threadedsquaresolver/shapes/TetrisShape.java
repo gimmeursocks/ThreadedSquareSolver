@@ -1,10 +1,11 @@
 package com.threadedsquaresolver.shapes;
 
-public abstract class TetrisShape {
+public abstract class TetrisShape implements Cloneable {
     protected int shape[][];
     protected int height;
     protected int width;
-    protected int orientation = 0;
+    protected int orientation;
+    protected int id;
 
     public abstract int getMaxRotations();
 
@@ -28,6 +29,14 @@ public abstract class TetrisShape {
         return orientation;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     protected void rotate() {
         int[][] rotatedArray = new int[this.width][this.height];
 
@@ -44,5 +53,17 @@ public abstract class TetrisShape {
         this.width = temp;
 
         this.orientation = (this.orientation + 1) % getMaxRotations();
+    }
+
+    public TetrisShape rclone(int a) {
+        try {
+            TetrisShape obj = (TetrisShape) super.clone();
+            for (int i = 0; i < a; i++) {
+                obj.rotate();
+            }
+            return (TetrisShape) obj;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
     }
 }

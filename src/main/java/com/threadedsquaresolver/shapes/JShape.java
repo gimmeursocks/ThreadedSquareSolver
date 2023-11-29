@@ -21,4 +21,8 @@ public class JShape extends TetrisShape {
     public int getMaxRotations() {
         return 4;
     }
+
+    public JShape createNewInstance(int orientation) {
+        return new JShape(orientation);
+    }
 }

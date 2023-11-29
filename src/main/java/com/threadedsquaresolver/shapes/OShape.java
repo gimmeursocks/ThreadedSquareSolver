@@ -21,4 +21,8 @@ public class OShape extends TetrisShape {
     public int getMaxRotations() {
         return 1;
     }
+
+    public OShape createNewInstance(int orientation) {
+        return new OShape(orientation);
+    }
 }

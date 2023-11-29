@@ -13,6 +13,6 @@ public class SolverTest {
         toSolve.add(new JShape());
 
         ThreadMaker tm = new ThreadMaker(toSolve);
-        // System.out.println(tm.toString());
+        System.out.println(tm.toString());
     }
 }

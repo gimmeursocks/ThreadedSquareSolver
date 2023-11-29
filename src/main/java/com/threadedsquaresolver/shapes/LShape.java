@@ -21,4 +21,8 @@ public class LShape extends TetrisShape {
     public int getMaxRotations() {
         return 4;
     }
+
+    public LShape createNewInstance(int orientation) {
+        return new LShape(orientation);
+    }
 }
