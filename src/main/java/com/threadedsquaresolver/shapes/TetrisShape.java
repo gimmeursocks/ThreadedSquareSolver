@@ -5,7 +5,7 @@ public abstract class TetrisShape implements Cloneable {
     protected int height;
     protected int width;
     protected int orientation;
-    protected int id;
+    protected volatile int id;
 
     public abstract int getMaxRotations();
 
@@ -29,7 +29,7 @@ public abstract class TetrisShape implements Cloneable {
         return orientation;
     }
 
-    public int getId() {
+    public synchronized int getId() {
         return id;
     }
 
@@ -55,9 +55,30 @@ public abstract class TetrisShape implements Cloneable {
         this.orientation = (this.orientation + 1) % getMaxRotations();
     }
 
+    public TetrisShape clone() {
+        try {
+            TetrisShape obj = (TetrisShape) super.clone();
+
+            obj.shape = new int[this.shape.length][this.shape[0].length];
+            for (int i = 0; i < this.shape.length; i++) {
+                System.arraycopy(this.shape[i], 0, obj.shape[i], 0, this.shape[i].length);
+            }
+
+            return (TetrisShape) obj;
+        } catch (CloneNotSupportedException e) {
+            throw new InternalError(e);
+        }
+    }
+
     public TetrisShape rclone(int a) {
         try {
             TetrisShape obj = (TetrisShape) super.clone();
+
+            obj.shape = new int[this.shape.length][this.shape[0].length];
+            for (int i = 0; i < this.shape.length; i++) {
+                obj.shape[i] = this.shape[i].clone();
+            }
+
             for (int i = 0; i < a; i++) {
                 obj.rotate();
             }

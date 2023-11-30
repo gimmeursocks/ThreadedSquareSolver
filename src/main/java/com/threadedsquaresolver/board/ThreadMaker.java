@@ -10,46 +10,46 @@ public class ThreadMaker {
     public List<TetrisBoard> solutionList;
 
     public ThreadMaker(ArrayList<TetrisShape> shapes) {
-        ArrayList<ArrayList<TetrisShape>> results = permutate(shapes);
+        ArrayList<ArrayList<TetrisShape>> results = generateShapePermutations(shapes);
         solutionList = Collections.synchronizedList(new ArrayList<>());
 
-        for (ArrayList<TetrisShape> p_shapes : results) {
-            for (int i = 0; i < p_shapes.size(); i++) {
-                p_shapes.get(i).setId(i);
+        for (ArrayList<TetrisShape> p_shape : results) {
+            for (int i = 0; i < p_shape.size(); i++) {
+                p_shape.get(i).setId(i);
             }
-            TetrisBoardSolver solver = new TetrisBoardSolver(p_shapes, solutionList);
-            try {
-                solver.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            TetrisBoardSolver solver = new TetrisBoardSolver(p_shape, solutionList);
         }
     }
 
-    private ArrayList<ArrayList<TetrisShape>> permutate(ArrayList<TetrisShape> shapes) {
-        ArrayList<ArrayList<TetrisShape>> results = new ArrayList<ArrayList<TetrisShape>>();
-        dfs(shapes, results, new ArrayList<>());
+    private ArrayList<ArrayList<TetrisShape>> generateShapePermutations(ArrayList<TetrisShape> shapes) {
+        ArrayList<ArrayList<TetrisShape>> results = new ArrayList<>();
+        generatePermutations(shapes, results, new ArrayList<>());
         return results;
     }
 
-    private void dfs(ArrayList<TetrisShape> nums, ArrayList<ArrayList<TetrisShape>> results,
+    private void generatePermutations(ArrayList<TetrisShape> nums, ArrayList<ArrayList<TetrisShape>> results,
             ArrayList<TetrisShape> result) {
         if (nums.size() == result.size()) {
-            ArrayList<TetrisShape> temp = new ArrayList<>(result);
-            if (!notUnique(results, temp)) {
+            ArrayList<TetrisShape> temp = new ArrayList<>();
+
+            for (TetrisShape sh : result) {
+                temp.add(sh.clone());
+            }
+
+            if (!isNotUnique(results, temp)) {
                 results.add(temp);
             }
         }
         for (int i = 0; i < nums.size(); i++) {
             if (!result.contains(nums.get(i))) {
                 result.add(nums.get(i));
-                dfs(nums, results, result);
+                generatePermutations(nums, results, result);
                 result.remove(result.size() - 1);
             }
         }
     }
 
-    private boolean notUnique(ArrayList<ArrayList<TetrisShape>> results, ArrayList<TetrisShape> result) {
+    private boolean isNotUnique(ArrayList<ArrayList<TetrisShape>> results, ArrayList<TetrisShape> result) {
         for (ArrayList<TetrisShape> arr : results) {
             boolean match = true;
             for (int i = 0; i < arr.size(); i++) {
