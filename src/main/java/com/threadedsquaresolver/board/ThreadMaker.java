@@ -17,7 +17,7 @@ public class ThreadMaker {
             for (int i = 0; i < p_shape.size(); i++) {
                 p_shape.get(i).setId(i);
             }
-            TetrisBoardSolver solver = new TetrisBoardSolver(p_shape, solutionList);
+            new TetrisBoardSolver(p_shape, solutionList);
         }
     }
 
