@@ -5,8 +5,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-
-
 public class Controller {
 
     @FXML
@@ -27,7 +25,6 @@ public class Controller {
     @FXML
     private TextField T_input;
 
-
     @FXML
     private TextField Z_input;
 
@@ -43,7 +40,6 @@ public class Controller {
 
     private int minValue = 0;
     private int maxValue = 4;
-
 
     private void saveValues() {
         inputI = I_input.getText();
@@ -76,8 +72,6 @@ public class Controller {
         setMinMaxValues(Z_input);
     }
 
-
-
     public String getInputI() {
         return inputI;
     }
@@ -89,6 +83,7 @@ public class Controller {
     public String getInputL() {
         return inputL;
     }
+
     public String getInputO() {
         return inputO;
     }
@@ -104,28 +99,28 @@ public class Controller {
     public String getInputZ() {
         return inputZ;
     }
+
     @FXML
     void setValues(MouseEvent event) {
         saveValues();
-        String inputIValue = getInputI();
-        System.out.println("Input I value from Controller: " + inputIValue);
+        // String inputIValue = getInputI();
+        // System.out.println("Input I value from Controller: " + inputIValue);
     }
+
     private void setMinMaxValues(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 textField.setText(newValue.replaceAll("[^\\d]", ""));
             } else {
-                int value = Integer.parseInt(newValue);
-                if (value < minValue || value > maxValue) {
-                    textField.setText(oldValue);
+                try {
+                    int value = Integer.parseInt(newValue);
+                    if (value < minValue || value > maxValue) {
+                        textField.setText(oldValue);
+                    }
+                } catch (Exception e) {
                 }
             }
         });
     }
-
-
-
-
-
 
 }

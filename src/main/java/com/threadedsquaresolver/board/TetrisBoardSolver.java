@@ -17,6 +17,11 @@ public class TetrisBoardSolver extends Thread {
         this.currentShape = shapes.get(0);
         this.shapes = shapes;
         this.solutionList = solutionList;
+
+        for (int i = 0; i < currentShape.getMaxRotations(); i++) {
+            TetrisBoardSolver solver = new TetrisBoardSolver(new TetrisBoard(currentBoard), currentShape.rclone(i), shapes, solutionList);
+            solver.start();
+        }
     }
 
     public TetrisBoardSolver(TetrisBoard board, TetrisShape shape, ArrayList<TetrisShape> shapes, List<TetrisBoard> solutionList) {
@@ -28,22 +33,17 @@ public class TetrisBoardSolver extends Thread {
 
     @Override
     public void run() {
-        if (!solutionFound && currentBoard.placeTetrisShape(currentShape)) {
+        if (!solutionFound && !Thread.interrupted() && currentBoard.placeTetrisShape(currentShape)) {
             if (currentShape.getId() < 3) {
                 TetrisShape nextShape = shapes.get(currentShape.getId() + 1);
                 for (int i = 0; i < nextShape.getMaxRotations(); i++) {
                     if (!solutionFound) {
-                        TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard),
-                                nextShape.rclone(i), shapes, solutionList);
+                        TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard), nextShape.rclone(i), shapes, solutionList);
                         childSolver.start();
                     }
                 }
             } else {
-                // solved
                 solutionFound = true;
-                // System.out.print("\nfound--->");
-                // System.out.println(currentBoard.getString(currentBoard.getArrayList()));
-                // printArray(currentBoard.getBoard());
                 solutionList.add(currentBoard);
                 return;
             }

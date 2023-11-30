@@ -8,17 +8,21 @@ public class ThreadMaker {
 
     public TetrisBoard ansBoard;
     public List<TetrisBoard> solutionList;
-    // public volatile boolean found = false;
 
     public ThreadMaker(ArrayList<TetrisShape> shapes) {
         ArrayList<ArrayList<TetrisShape>> results = permutate(shapes);
         solutionList = Collections.synchronizedList(new ArrayList<>());
+
         for (ArrayList<TetrisShape> p_shapes : results) {
             for (int i = 0; i < p_shapes.size(); i++) {
                 p_shapes.get(i).setId(i);
             }
             TetrisBoardSolver solver = new TetrisBoardSolver(p_shapes, solutionList);
-            solver.start();
+            try {
+                solver.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -60,8 +60,8 @@
             <TextField fx:id="L_input" layoutX="117.0" layoutY="160.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="O_input" layoutX="117.0" layoutY="200.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="S_input" layoutX="117.0" layoutY="240.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="T_input" layoutX="117.0" layoutY="276.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="Z_input" layoutX="117.0" layoutY="310.0" prefHeight="26.0" prefWidth="94.0" />
+            <TextField fx:id="Z_input" layoutX="117.0" layoutY="277.0" prefHeight="26.0" prefWidth="94.0" />
+            <TextField fx:id="T_input" layoutX="117.0" layoutY="317.0" prefHeight="26.0" prefWidth="94.0" />
             <Group layoutX="409.0" layoutY="91.0">
                <children>
                   <Box id="00" depth="100.0" height="70.0" styleClass="boardbox" width="70.0" />
