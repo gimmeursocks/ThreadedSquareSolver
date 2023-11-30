@@ -37,15 +37,13 @@ public class TetrisBoardSolver extends Thread {
     @Override
     public void run() {
         int currentShapeId = currentShape.getId();
-        if (!solutionFound.get() && currentBoard.placeTetrisShape(currentShape)) {
+        if (currentBoard.placeTetrisShape(currentShape)) {
             if (currentShapeId < 3) {
                 TetrisShape nextShape = this.shapes.get(currentShapeId + 1);
                 for (int i = 0; i < nextShape.getMaxRotations(); i++) {
-                    if (!solutionFound.get()) {
-                        TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard),
-                                nextShape.rclone(i), shapes, solutionList);
-                        childSolver.start();
-                    }
+                    TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard),
+                            nextShape.rclone(i), shapes, solutionList);
+                    childSolver.start();
                 }
             } else {
                 solutionFound.set(true);
