@@ -7,14 +7,14 @@ import java.util.ArrayList;
 public class SolverTest {
     public static void main(String[] args) {
         ArrayList<TetrisShape> toSolve = new ArrayList<TetrisShape>();
+        toSolve.add(new OShape());
+        toSolve.add(new LShape());
+        toSolve.add(new IShape());
+        toSolve.add(new JShape());
         // toSolve.add(new OShape());
-        // toSolve.add(new LShape());
-        // toSolve.add(new IShape());
-        // toSolve.add(new JShape());
-        toSolve.add(new OShape());
-        toSolve.add(new OShape());
-        toSolve.add(new OShape());
-        toSolve.add(new OShape());
+        // toSolve.add(new OShape());
+        // toSolve.add(new OShape());
+        // toSolve.add(new OShape());
 
         ThreadMaker tm = new ThreadMaker(toSolve);
 
@@ -25,11 +25,21 @@ public class SolverTest {
         }
         System.out.println(tm.solutionList.size());
         for (TetrisBoard board : tm.solutionList) {
+            printArray(board.getBoard());
             for (TetrisShape shape : board.getArrayList()) {
                 System.out.print(shape.getClass().getSimpleName() + " " + shape.getCurrentOrientation() + " "
                         + "\n");
             }
             System.out.println("///////////////");
+        }
+    }
+
+    public static void printArray(int[][] array) {
+        for (int[] row : array) {
+            for (int value : row) {
+                System.out.print(value + " ");
+            }
+            System.out.println();
         }
     }
 }

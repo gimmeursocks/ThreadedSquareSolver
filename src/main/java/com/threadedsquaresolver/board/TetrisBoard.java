@@ -1,6 +1,7 @@
 package com.threadedsquaresolver.board;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.threadedsquaresolver.shapes.*;
 
@@ -11,6 +12,8 @@ public class TetrisBoard {
 
     public TetrisBoard() {
         this.board = new int[4][4];
+        for (int[] row : this.board)
+            Arrays.fill(row, -1);
         this.shapes = new ArrayList<TetrisShape>();
     }
 
@@ -33,10 +36,10 @@ public class TetrisBoard {
         return shapes;
     }
 
-    public String getString(ArrayList<TetrisShape> arr){
+    public String getString(ArrayList<TetrisShape> arr) {
         String str = new String(" ");
         for (int i = 0; i < arr.size(); i++) {
-            str += arr.get(i).getClass().getSimpleName() +" "+ arr.get(i).getCurrentOrientation() + "//";
+            str += arr.get(i).getClass().getSimpleName() + " " + arr.get(i).getCurrentOrientation() + "//";
         }
         return str;
     }
@@ -44,7 +47,7 @@ public class TetrisBoard {
     private boolean fitTetrisShape(TetrisShape shape, int i, int j) {
         for (int h = 0; h < shape.getHeight(); h++) {
             for (int w = 0; w < shape.getWidth(); w++) {
-                if (this.board[h + i][w + j] == 1 && shape.getShape(h, w) == 1) {
+                if (this.board[h + i][w + j] != -1 && shape.getShape(h, w) == 1) {
                     return false;
                 }
             }
@@ -53,7 +56,7 @@ public class TetrisBoard {
         for (int h = 0; h < shape.getHeight(); h++) {
             for (int w = 0; w < shape.getWidth(); w++) {
                 if (shape.getShape(h, w) == 1) {
-                    this.board[h + i][w + j] = 1;
+                    this.board[h + i][w + j] = shape.getId();
                 }
             }
         }
