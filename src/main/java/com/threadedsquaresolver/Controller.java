@@ -1,16 +1,12 @@
 package com.threadedsquaresolver;
 
-import com.threadedsquaresolver.board.TetrisBoard;
-import com.threadedsquaresolver.board.ThreadMaker;
+import com.threadedsquaresolver.board.*;
 import com.threadedsquaresolver.shapes.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Box;
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
 
@@ -34,12 +30,11 @@ public class Controller {
     @FXML
     private TextField T_input;
 
-
     public static final int[][] testMatrix = {
-            {0, 1, 2, 3},
-            {1, 2, 3, 0},
-            {2, 3, 0, 1},
-            {3, 0, 1, 2}
+            { 0, 1, 2, 3 },
+            { 1, 2, 3, 0 },
+            { 2, 3, 0, 1 },
+            { 3, 0, 1, 2 }
     };
     @FXML
 
@@ -94,6 +89,7 @@ public class Controller {
     private int minValue = 0;
     private int maxValue = 4;
     ArrayList<TetrisShape> toSolve = new ArrayList<TetrisShape>();
+
     private void saveValues() {
         inputI = Integer.parseInt(I_input.getText());
         inputJ = Integer.parseInt(J_input.getText());
@@ -115,8 +111,6 @@ public class Controller {
         Z_input.setText("0");
     }
 
-
-
     @FXML
     private Rectangle myrec;
 
@@ -131,6 +125,7 @@ public class Controller {
     public int getInputL() {
         return inputL;
     }
+
     public int getInputO() {
         return inputO;
     }
@@ -147,29 +142,29 @@ public class Controller {
         return inputZ;
     }
 
-private void setColorsForMatrix(int[][] matrix) {
-    Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+    private void setColorsForMatrix(int[][] matrix) {
+        Color[] colors = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW };
 
-    javafx.application.Platform.runLater(() -> {
-        for (int value = 0; value < colors.length; value++) {
-            int finalValue = value;
+        javafx.application.Platform.runLater(() -> {
+            for (int value = 0; value < colors.length; value++) {
+                int finalValue = value;
 
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[i].length; j++) {
-                    if (matrix[i][j] == finalValue) {
-                        rectangles[i][j].setFill(colors[finalValue]);
+                for (int i = 0; i < matrix.length; i++) {
+                    for (int j = 0; j < matrix[i].length; j++) {
+                        if (matrix[i][j] == finalValue) {
+                            rectangles[i][j].setFill(colors[finalValue]);
+                        }
                     }
                 }
-            }
 
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-    });
-}
+        });
+    }
 
     @FXML
     void setValues(MouseEvent event) {
@@ -209,18 +204,18 @@ private void setColorsForMatrix(int[][] matrix) {
 
         }
 
-
         ThreadMaker tm = new ThreadMaker(toSolve);
         try {
             Thread.sleep(5000);
-            System.out.println("عدد الحلول"+tm.solutionList.size());
+            System.out.println("عدد الحلول" + tm.solutionList.size());
 
         } catch (Exception e) {
-                System.out.println("No Solution found");
-            }
+            System.out.println("No Solution found");
+        }
         int[][] arr = tm.solutionList.get(1).getBoard();
         setColorsForMatrix(arr);
-        }
+    }
+
     public void initialize() {
         solutionB.setVisible(false);
         setDefaultValues();
@@ -249,17 +244,19 @@ private void setColorsForMatrix(int[][] matrix) {
         rectangles[3][3] = L16;
     }
 
-        private void setMinMaxValues (TextField textField){
-            textField.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*")) {
-                    textField.setText(newValue.replaceAll("[^\\d]", ""));
-                } else {
+    private void setMinMaxValues(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                textField.setText(newValue.replaceAll("[^\\d]", ""));
+            } else {
+                try {
                     int value = Integer.parseInt(newValue);
                     if (value < minValue || value > maxValue) {
                         textField.setText(oldValue);
                     }
+                } catch (Exception e) {
                 }
-            });
-        }
+            }
+        });
     }
-
+}
