@@ -48,7 +48,7 @@ public class TetrisBoardSolver extends Thread {
             } else {
                 solutionFound.set(true);
                 solutionList.add(currentBoard);
-                printArray(currentBoard.getBoard());
+                //printArray(currentBoard.getBoard());
                 return;
             }
         } else {

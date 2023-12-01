@@ -78,7 +78,9 @@ public class Controller {
     @FXML
     private Rectangle L16;
     @FXML
-    private Rectangle[] rectangles = new Rectangle[16];
+    private Rectangle[][] rectangles = new Rectangle[4][4];
+    @FXML
+    private Button solutionB;
     @FXML
     private Button solve;
     private int inputI;
@@ -113,32 +115,7 @@ public class Controller {
         Z_input.setText("0");
     }
 
-    public void initialize() {
-        setDefaultValues();
-        setMinMaxValues(I_input);
-        setMinMaxValues(J_input);
-        setMinMaxValues(L_input);
-        setMinMaxValues(O_input);
-        setMinMaxValues(S_input);
-        setMinMaxValues(T_input);
-        setMinMaxValues(Z_input);
-//        rectangles[0] = L1;
-//        rectangles[1] = L2;
-//        rectangles[2] = L3;
-//        rectangles[3] = L4;
-//        rectangles[4] = L5;
-//        rectangles[5] = L6;
-//        rectangles[6] = L7;
-//        rectangles[7] = L8;
-//        rectangles[8] = L9;
-//        rectangles[9] = L10;
-//        rectangles[10] = L11;
-//        rectangles[11] = L12;
-//        rectangles[12] = L13;
-//        rectangles[13] = L14;
-//        rectangles[14] = L15;
-//        rectangles[15] = L16;
-    }
+
 
     @FXML
     private Rectangle myrec;
@@ -169,16 +146,31 @@ public class Controller {
     public int getInputZ() {
         return inputZ;
     }
-//    public void SetColor(int [][]arr){
-//        for(int i=0;i<4;i++){
-//            for(int j=0;j<4;j++){
-//                int index = i * 4 + j;
-//                if (arr[i][j] == 1) {
-//                    rectangles[index].setFill(Color.RED);
-//                }
-//            }
-//        }
-//    }
+
+private void setColorsForMatrix(int[][] matrix) {
+    Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+
+    javafx.application.Platform.runLater(() -> {
+        for (int value = 0; value < colors.length; value++) {
+            int finalValue = value;
+
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    if (matrix[i][j] == finalValue) {
+                        rectangles[i][j].setFill(colors[finalValue]);
+                    }
+                }
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    });
+}
+
     @FXML
     void setValues(MouseEvent event) {
         saveValues();
@@ -217,56 +209,46 @@ public class Controller {
 
         }
 
-//        setColorsForMatrix(testMatrix);
 
-//        if((inputZ + inputI + inputJ +inputL + inputO +inputS + inputT) != 0){
-//
-//        }
         ThreadMaker tm = new ThreadMaker(toSolve);
-
-
         try {
             Thread.sleep(5000);
             System.out.println("عدد الحلول"+tm.solutionList.size());
+
         } catch (Exception e) {
                 System.out.println("No Solution found");
             }
+        int[][] arr = tm.solutionList.get(1).getBoard();
+        setColorsForMatrix(arr);
         }
+    public void initialize() {
+        solutionB.setVisible(false);
+        setDefaultValues();
+        setMinMaxValues(I_input);
+        setMinMaxValues(J_input);
+        setMinMaxValues(L_input);
+        setMinMaxValues(O_input);
+        setMinMaxValues(S_input);
+        setMinMaxValues(T_input);
+        setMinMaxValues(Z_input);
+        rectangles[0][0] = L1;
+        rectangles[0][1] = L2;
+        rectangles[0][2] = L3;
+        rectangles[0][3] = L4;
+        rectangles[1][0] = L5;
+        rectangles[1][1] = L6;
+        rectangles[1][2] = L7;
+        rectangles[1][3] = L8;
+        rectangles[2][0] = L9;
+        rectangles[2][1] = L10;
+        rectangles[2][2] = L11;
+        rectangles[2][3] = L12;
+        rectangles[3][0] = L13;
+        rectangles[3][1] = L14;
+        rectangles[3][2] = L15;
+        rectangles[3][3] = L16;
+    }
 
-        // Not working ?!
-//    private void setColorsForMatrix(int[][] matrix) {
-//        Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
-//
-//        javafx.application.Platform.runLater(() -> {
-//            for (int value = 0; value < colors.length; value++) {
-//                int finalValue = value;
-//
-//                for (int i = 0; i < matrix.length; i++) {
-//                    for (int j = 0; j < matrix[i].length; j++) {
-//                        if (matrix[i][j] == finalValue) {
-//                            int index = i * matrix[i].length + j;
-//                            rectangles[index].setFill(colors[finalValue]);
-//                        }
-//                    }
-//                }
-//
-//                try {
-//                    Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
-
-    public void print(int[][] arr){
-            for (int[] row : arr) {
-                for (int value : row) {
-                    System.out.print(value + " ");
-                }
-                System.out.println();
-            }
-        }
         private void setMinMaxValues (TextField textField){
             textField.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.matches("\\d*")) {
