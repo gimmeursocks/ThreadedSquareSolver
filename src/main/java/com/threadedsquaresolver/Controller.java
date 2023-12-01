@@ -35,15 +35,20 @@ public class Controller {
     private TextField T_input;
 
 
+    public static final int[][] testMatrix = {
+            {0, 1, 2, 3},
+            {1, 2, 3, 0},
+            {2, 3, 0, 1},
+            {3, 0, 1, 2}
+    };
     @FXML
 
     private TextField Z_input;
+
     @FXML
     public Rectangle L1;
     @FXML
     private Rectangle L2;
-    @FXML
-    private Rectangle L17;
     @FXML
     private Rectangle L3;
     @FXML
@@ -188,7 +193,6 @@ public class Controller {
             if (inputJ != 0) {
                 toSolve.add(new JShape());
                 inputJ--;
-                System.out.println("Input I value from Controller: " + inputIValue);
             }
             if (inputL != 0) {
                 toSolve.add(new LShape());
@@ -210,21 +214,52 @@ public class Controller {
                 toSolve.add(new ZShape());
                 inputZ--;
             }
-            System.out.println(toSolve.isEmpty());
 
         }
+
+//        setColorsForMatrix(testMatrix);
 
 //        if((inputZ + inputI + inputJ +inputL + inputO +inputS + inputT) != 0){
 //
 //        }
         ThreadMaker tm = new ThreadMaker(toSolve);
-        //System.out.println(tm.toString());
-        this.L1.setFill(Color.RED);
-        L2.setFill(Color.RED);
-        //print(tm.solutionList.get(0).getBoard());
-        System.out.println(tm.solutionList.size());
+
+
+        try {
+            Thread.sleep(5000);
+            System.out.println("عدد الحلول"+tm.solutionList.size());
+        } catch (Exception e) {
+                System.out.println("No Solution found");
+            }
         }
-        public void print(int[][] arr){
+
+        // Not working ?!
+//    private void setColorsForMatrix(int[][] matrix) {
+//        Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+//
+//        javafx.application.Platform.runLater(() -> {
+//            for (int value = 0; value < colors.length; value++) {
+//                int finalValue = value;
+//
+//                for (int i = 0; i < matrix.length; i++) {
+//                    for (int j = 0; j < matrix[i].length; j++) {
+//                        if (matrix[i][j] == finalValue) {
+//                            int index = i * matrix[i].length + j;
+//                            rectangles[index].setFill(colors[finalValue]);
+//                        }
+//                    }
+//                }
+//
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+
+    public void print(int[][] arr){
             for (int[] row : arr) {
                 for (int value : row) {
                     System.out.print(value + " ");
