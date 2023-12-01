@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -9,9 +10,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Box?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="507.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.threadedsquaresolver.Controller">
+<VBox prefHeight="507.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.threadedsquaresolver.Controller">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -60,28 +62,61 @@
             <TextField fx:id="L_input" layoutX="117.0" layoutY="160.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="O_input" layoutX="117.0" layoutY="200.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="S_input" layoutX="117.0" layoutY="240.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="Z_input" layoutX="117.0" layoutY="277.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="T_input" layoutX="117.0" layoutY="317.0" prefHeight="26.0" prefWidth="94.0" />
-            <Group layoutX="409.0" layoutY="91.0">
-               <children>
-                  <Box id="00" depth="100.0" height="70.0" styleClass="boardbox" width="70.0" />
-                  <Box id="10" depth="100.0" height="70.0" layoutY="70.0" styleClass="boardbox" width="70.0" />
-                  <Box id="21" depth="100.0" height="70.0" layoutY="140.0" styleClass="boardbox" width="70.0" />
-                  <Box id="30" depth="100.0" height="70.0" layoutY="211.0" styleClass="boardbox" width="70.0" />
-                  <Box id="01" depth="100.0" height="70.0" layoutX="70.0" layoutY="1.0" styleClass="boardbox" width="70.0" />
-                  <Box id="11" depth="100.0" height="70.0" layoutX="70.0" layoutY="71.0" styleClass="boardbox" width="70.0" />
-                  <Box id="22" depth="100.0" height="70.0" layoutX="70.0" layoutY="141.0" styleClass="boardbox" width="70.0" />
-                  <Box id="31" depth="100.0" height="70.0" layoutX="70.0" layoutY="210.0" styleClass="boardbox" width="70.0" />
-                  <Box id="02" depth="100.0" height="70.0" layoutX="140.0" layoutY="1.0" styleClass="boardbox" width="70.0" />
-                  <Box id="12" depth="100.0" height="70.0" layoutX="140.0" layoutY="71.0" styleClass="boardbox" width="70.0" />
-                  <Box id="23" depth="100.0" height="70.0" layoutX="140.0" layoutY="141.0" styleClass="boardbox" width="70.0" />
-                  <Box id="32" depth="100.0" height="70.0" layoutX="140.0" layoutY="210.0" styleClass="boardbox" width="70.0" />
-                  <Box id="03" depth="100.0" height="70.0" layoutX="210.0" layoutY="1.0" styleClass="boardbox" width="70.0" />
-                  <Box id="13" depth="100.0" height="70.0" layoutX="210.0" layoutY="71.0" styleClass="boardbox" width="70.0" />
-                  <Box id="24" depth="100.0" height="70.0" layoutX="210.0" layoutY="141.0" styleClass="boardbox" width="70.0" />
-                  <Box id="33" depth="100.0" height="70.0" layoutX="210.0" layoutY="210.0" styleClass="boardbox" width="70.0" />
-               </children>
-            </Group>
+            <TextField fx:id="T_input" layoutX="117.0" layoutY="276.0" prefHeight="26.0" prefWidth="94.0" />
+            <TextField fx:id="Z_input" layoutX="117.0" layoutY="310.0" prefHeight="26.0" prefWidth="94.0" />
+            <Group autoSizeChildren="false" layoutX="536.0" layoutY="183.0" scaleX="2.5" scaleY="2.5" AnchorPane.rightAnchor="159.20000000000005" />
+            <Label layoutX="103.0" layoutY="76.0" prefHeight="30.0" prefWidth="8.0" text="I">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="308.0" prefHeight="30.0" prefWidth="8.0" text="Z">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="274.0" prefHeight="30.0" prefWidth="8.0" text="T">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="238.0" prefHeight="30.0" prefWidth="8.0" text="S">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="198.0" prefHeight="30.0" prefWidth="18.0" text="O">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="158.0" prefHeight="30.0" prefWidth="8.0" text="L">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="103.0" layoutY="120.0" prefHeight="30.0" prefWidth="8.0" text="J">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Rectangle fx:id="L1" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L13" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L9" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L5" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L14" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L10" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L6" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L15" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L11" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L7" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L4" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L16" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L12" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L8" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L17" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="284.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
       </children>
     </AnchorPane>
   </children>
