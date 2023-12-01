@@ -2,6 +2,8 @@ package com.threadedsquaresolver;
 
 import com.threadedsquaresolver.board.*;
 import com.threadedsquaresolver.shapes.*;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -143,27 +145,32 @@ public class Controller {
     }
 
     private void setColorsForMatrix(int[][] matrix) {
-        Color[] colors = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW };
+        Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
+        int delay = 1000;
 
-        javafx.application.Platform.runLater(() -> {
-            for (int value = 0; value < colors.length; value++) {
-                int finalValue = value;
+        for (int value = 0; value < colors.length; value++) {
+            int finalValue = value;
 
-                for (int i = 0; i < matrix.length; i++) {
-                    for (int j = 0; j < matrix[i].length; j++) {
-                        if (matrix[i][j] == finalValue) {
-                            rectangles[i][j].setFill(colors[finalValue]);
-                        }
-                    }
-                }
-
+            Thread colorThread = new Thread(() -> {
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(finalValue * delay);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-        });
+
+                Platform.runLater(() -> {
+                    for (int i = 0; i < matrix.length; i++) {
+                        for (int j = 0; j < matrix[i].length; j++) {
+                            if (matrix[i][j] == finalValue) {
+                                rectangles[i][j].setFill(colors[finalValue]);
+                            }
+                        }
+                    }
+                });
+            });
+
+            colorThread.start();
+        }
     }
 
     @FXML
@@ -206,7 +213,7 @@ public class Controller {
 
         ThreadMaker tm = new ThreadMaker(toSolve);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             System.out.println("عدد الحلول" + tm.solutionList.size());
 
         } catch (Exception e) {
