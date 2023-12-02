@@ -56,26 +56,26 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-            <Button fx:id="solve" layoutX="24.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="186.0" text="Solve" />
+            <Button fx:id="solveButton" layoutX="24.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="186.0" text="Solve" />
             <TextField fx:id="I_input" layoutX="117.0" layoutY="78.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="J_input" layoutX="117.0" layoutY="122.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="L_input" layoutX="117.0" layoutY="160.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="O_input" layoutX="117.0" layoutY="200.0" prefHeight="26.0" prefWidth="94.0" />
             <TextField fx:id="S_input" layoutX="117.0" layoutY="240.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="T_input" layoutX="117.0" layoutY="276.0" prefHeight="26.0" prefWidth="94.0" />
-            <TextField fx:id="Z_input" layoutX="117.0" layoutY="310.0" prefHeight="26.0" prefWidth="94.0" />
+            <TextField fx:id="T_input" layoutX="118.0" layoutY="310.0" prefHeight="26.0" prefWidth="94.0" />
+            <TextField fx:id="Z_input" layoutX="117.0" layoutY="276.0" prefHeight="26.0" prefWidth="94.0" />
             <Group autoSizeChildren="false" layoutX="536.0" layoutY="183.0" scaleX="2.5" scaleY="2.5" AnchorPane.rightAnchor="159.20000000000005" />
             <Label layoutX="103.0" layoutY="76.0" prefHeight="30.0" prefWidth="8.0" text="I">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="103.0" layoutY="308.0" prefHeight="30.0" prefWidth="8.0" text="Z">
+            <Label layoutX="103.0" layoutY="308.0" prefHeight="30.0" prefWidth="8.0" text="T">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label layoutX="103.0" layoutY="274.0" prefHeight="30.0" prefWidth="8.0" text="T">
+            <Label layoutX="103.0" layoutY="274.0" prefHeight="30.0" prefWidth="8.0" text="Z">
                <font>
                   <Font size="20.0" />
                </font>
@@ -101,22 +101,22 @@
                </font>
             </Label>
             <Rectangle fx:id="L1" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L13" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L9" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L5" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
             <Rectangle fx:id="L2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L14" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L10" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L6" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
             <Rectangle fx:id="L3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L15" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L11" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L7" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
             <Rectangle fx:id="L4" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="83.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L16" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="L12" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L5" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L6" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L7" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
             <Rectangle fx:id="L8" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="144.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Button fx:id="solutionB" layoutX="573.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="142.0" text="Show Another Solution" />
+            <Rectangle fx:id="L9" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L10" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L11" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L12" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="206.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L13" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="457.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L14" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="515.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L15" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="572.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="L16" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="63.0" layoutX="630.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Button fx:id="solutionButton" layoutX="573.0" layoutY="370.0" mnemonicParsing="false" onMouseClicked="#setValues" prefHeight="26.0" prefWidth="142.0" text="Show Another Solution" />
       </children>
     </AnchorPane>
   </children>

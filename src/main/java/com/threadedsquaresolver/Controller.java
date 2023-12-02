@@ -5,42 +5,31 @@ import com.threadedsquaresolver.shapes.*;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
+
 import javafx.scene.paint.Color;
 
 public class Controller {
 
     @FXML
     private TextField I_input;
-
     @FXML
     private TextField J_input;
-
     @FXML
     private TextField L_input;
-
     @FXML
     private TextField O_input;
-
     @FXML
     private TextField S_input;
-
+    @FXML
+    private TextField Z_input;
     @FXML
     private TextField T_input;
-
-    public static final int[][] testMatrix = {
-            { 0, 1, 2, 3 },
-            { 1, 2, 3, 0 },
-            { 2, 3, 0, 1 },
-            { 3, 0, 1, 2 }
-    };
-    @FXML
-
-    private TextField Z_input;
 
     @FXML
     public Rectangle L1;
@@ -75,32 +64,59 @@ public class Controller {
     @FXML
     private Rectangle L16;
     @FXML
-    private Rectangle[][] rectangles = new Rectangle[4][4];
+    private Rectangle[][] rectangles;
     @FXML
-    private Button solutionB;
+    private Button solutionButton;
     @FXML
-    private Button solve;
+    private Button solveButton;
     private int inputI;
     private int inputJ;
     private int inputL;
     private int inputO;
     private int inputS;
-    private int inputT;
     private int inputZ;
+    private int inputT;
 
     private int minValue = 0;
     private int maxValue = 4;
-    ArrayList<TetrisShape> toSolve = new ArrayList<TetrisShape>();
+    ArrayList<TetrisShape> toSolve = new ArrayList<>();
 
     private void saveValues() {
-        inputI = Integer.parseInt(I_input.getText());
-        inputJ = Integer.parseInt(J_input.getText());
-        inputL = Integer.parseInt(L_input.getText());
-        inputO = Integer.parseInt(O_input.getText());
-        inputS = Integer.parseInt(S_input.getText());
-        inputT = Integer.parseInt(T_input.getText());
-        inputZ = Integer.parseInt(Z_input.getText());
+        try {
+            inputI = Integer.parseInt(getInt(I_input));
+            inputJ = Integer.parseInt(getInt(J_input));
+            inputL = Integer.parseInt(getInt(L_input));
+            inputO = Integer.parseInt(getInt(O_input));
+            inputS = Integer.parseInt(getInt(S_input));
+            inputZ = Integer.parseInt(getInt(Z_input));
+            inputT = Integer.parseInt(getInt(T_input));
 
+            toSolve.clear();
+
+            for (int i = 0; i < inputI; i++)
+                toSolve.add(new IShape());
+            for (int i = 0; i < inputJ; i++)
+                toSolve.add(new JShape());
+            for (int i = 0; i < inputL; i++)
+                toSolve.add(new LShape());
+            for (int i = 0; i < inputO; i++)
+                toSolve.add(new OShape());
+            for (int i = 0; i < inputS; i++)
+                toSolve.add(new SShape());
+            for (int i = 0; i < inputZ; i++)
+                toSolve.add(new ZShape());
+            for (int i = 0; i < inputT; i++)
+                toSolve.add(new TShape());
+
+        } catch (Exception e) {
+        }
+    }
+
+    private String getInt(TextField tf) {
+        String s = tf.getText();
+        if (s.isEmpty())
+            return "0";
+        return s;
     }
 
     private void setDefaultValues() {
@@ -145,8 +161,8 @@ public class Controller {
     }
 
     private void setColorsForMatrix(int[][] matrix) {
-        Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW};
-        int delay = 1000;
+        Color[] colors = { Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW };
+        int delay = 250;
 
         for (int value = 0; value < colors.length; value++) {
             int finalValue = value;
@@ -176,63 +192,42 @@ public class Controller {
     @FXML
     void setValues(MouseEvent event) {
         saveValues();
-        int inputIValue = getInputI();
-        System.out.println("Input I value from Controller: " + inputIValue);
-
-        for (int i = 0; i < 4; i++) {
-            if (inputI != 0) {
-                toSolve.add(new IShape());
-                inputI--;
-            }
-            if (inputJ != 0) {
-                toSolve.add(new JShape());
-                inputJ--;
-            }
-            if (inputL != 0) {
-                toSolve.add(new LShape());
-                inputL--;
-            }
-            if (inputO != 0) {
-                toSolve.add(new OShape());
-                inputO--;
-            }
-            if (inputT != 0) {
-                toSolve.add(new TShape());
-                inputT--;
-            }
-            if (inputS != 0) {
-                toSolve.add(new SShape());
-                inputS--;
-            }
-            if (inputZ != 0) {
-                toSolve.add(new ZShape());
-                inputZ--;
-            }
-
+        
+        if(toSolve.size() != 4){
+            Alert x = new Alert(Alert.AlertType.ERROR);
+            x.setHeaderText(null);
+            x.setContentText("Please choose 4 shapes only");
+            x.show();
         }
-
-        ThreadMaker tm = new ThreadMaker(toSolve);
-        try {
-            Thread.sleep(1000);
-            System.out.println("عدد الحلول" + tm.solutionList.size());
-
-        } catch (Exception e) {
-            System.out.println("No Solution found");
+        else{
+            ThreadMaker tm = new ThreadMaker(toSolve);
+            try {
+                Thread.sleep(1000);
+                System.out.println("number of solutions " + tm.solutionList.size());
+                int[][] arr = tm.solutionList.get(0).getBoard();
+                setColorsForMatrix(arr);
+    
+            } catch (Exception e) {
+                Alert x = new Alert(Alert.AlertType.WARNING);
+                x.setHeaderText(null);
+                x.setContentText("No Solution found");
+                x.show();
+            }
         }
-        int[][] arr = tm.solutionList.get(1).getBoard();
-        setColorsForMatrix(arr);
     }
 
     public void initialize() {
-        solutionB.setVisible(false);
+        solutionButton.setVisible(false);
         setDefaultValues();
         setMinMaxValues(I_input);
         setMinMaxValues(J_input);
         setMinMaxValues(L_input);
         setMinMaxValues(O_input);
         setMinMaxValues(S_input);
-        setMinMaxValues(T_input);
         setMinMaxValues(Z_input);
+        setMinMaxValues(T_input);
+        this.rectangles = new Rectangle[4][4];
+
         rectangles[0][0] = L1;
         rectangles[0][1] = L2;
         rectangles[0][2] = L3;
