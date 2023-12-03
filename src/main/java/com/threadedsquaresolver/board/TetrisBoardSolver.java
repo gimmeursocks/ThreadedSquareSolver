@@ -3,6 +3,7 @@ package com.threadedsquaresolver.board;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.RejectedExecutionException;
 
 import com.threadedsquaresolver.shapes.*;
 
@@ -23,7 +24,10 @@ public class TetrisBoardSolver extends Thread {
         for (int i = 0; i < currentShape.getMaxRotations(); i++) {
             TetrisBoardSolver solver = new TetrisBoardSolver(new TetrisBoard(currentBoard), currentShape.rclone(i),
                     shapes, solutionList, executor);
-            executor.submit(solver);
+            try {
+                executor.submit(solver);
+            } catch (RejectedExecutionException e) {
+            }
         }
     }
 
@@ -45,15 +49,16 @@ public class TetrisBoardSolver extends Thread {
                 for (int i = 0; i < nextShape.getMaxRotations(); i++) {
                     TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard),
                             nextShape.rclone(i), shapes, solutionList, executor);
-                    executor.submit(childSolver);
+                    try {
+                        executor.submit(childSolver);
+        
+                    } catch (RejectedExecutionException e) {
+                    }
                 }
             } else {
                 solutionList.add(currentBoard);
-                executor.shutdown();
-                return;
+                executor.shutdownNow();
             }
-        } else {
-            return;
         }
 
     }

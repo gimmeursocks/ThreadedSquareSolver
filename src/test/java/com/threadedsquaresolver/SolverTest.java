@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class SolverTest {
     public static void main(String[] args) throws InterruptedException {
         ArrayList<TetrisShape> toSolve = new ArrayList<TetrisShape>();
-        // toSolve.add(new OShape());
-        toSolve.add(new LShape());
+        toSolve.add(new OShape());
         toSolve.add(new LShape());
         toSolve.add(new IShape());
         toSolve.add(new JShape());

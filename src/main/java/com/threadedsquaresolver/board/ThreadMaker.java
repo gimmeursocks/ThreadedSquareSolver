@@ -3,6 +3,7 @@ package com.threadedsquaresolver.board;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import com.threadedsquaresolver.shapes.*;
@@ -23,7 +24,10 @@ public class ThreadMaker {
             for (int i = 0; i < p_shape.size(); i++) {
                 p_shape.get(i).setId(i);
             }
-            executor.submit(new TetrisBoardSolver(p_shape, solutionList, executor));
+            try {
+                executor.submit(new TetrisBoardSolver(p_shape, solutionList, executor));
+            } catch (RejectedExecutionException e) {
+            }
         }
         executor.awaitTermination(200, TimeUnit.MILLISECONDS);
     }
