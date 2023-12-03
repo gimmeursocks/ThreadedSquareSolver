@@ -1,6 +1,9 @@
 package com.threadedsquaresolver.board;
 
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import com.threadedsquaresolver.shapes.*;
 
@@ -8,18 +11,21 @@ public class ThreadMaker {
 
     public TetrisBoard ansBoard;
     public List<TetrisBoard> solutionList;
+    public ExecutorService executor;
+    public static final int noThreads = Runtime.getRuntime().availableProcessors();
 
-    public ThreadMaker(ArrayList<TetrisShape> shapes) {
+    public ThreadMaker(ArrayList<TetrisShape> shapes) throws InterruptedException {
         ArrayList<ArrayList<TetrisShape>> results = generateShapePermutations(shapes);
         solutionList = Collections.synchronizedList(new ArrayList<>());
+        executor = Executors.newFixedThreadPool(noThreads);
 
         for (ArrayList<TetrisShape> p_shape : results) {
             for (int i = 0; i < p_shape.size(); i++) {
                 p_shape.get(i).setId(i);
             }
-
-            new TetrisBoardSolver(p_shape, solutionList);
+            executor.submit(new TetrisBoardSolver(p_shape, solutionList, executor));
         }
+        executor.awaitTermination(200, TimeUnit.MILLISECONDS);
     }
 
     private ArrayList<ArrayList<TetrisShape>> generateShapePermutations(ArrayList<TetrisShape> shapes) {

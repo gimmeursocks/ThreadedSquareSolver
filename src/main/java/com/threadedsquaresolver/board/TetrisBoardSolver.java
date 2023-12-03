@@ -2,7 +2,7 @@ package com.threadedsquaresolver.board;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.ExecutorService;
 
 import com.threadedsquaresolver.shapes.*;
 
@@ -10,28 +10,30 @@ public class TetrisBoardSolver extends Thread {
     public TetrisBoard currentBoard;
     public TetrisShape currentShape;
     private ArrayList<TetrisShape> shapes;
-    public AtomicBoolean solutionFound = new AtomicBoolean(false);
     public List<TetrisBoard> solutionList;
+    public ExecutorService executor;
 
-    public TetrisBoardSolver(ArrayList<TetrisShape> shapes, List<TetrisBoard> solutionList) {
+    public TetrisBoardSolver(ArrayList<TetrisShape> shapes, List<TetrisBoard> solutionList, ExecutorService executor) {
         this.currentBoard = new TetrisBoard();
         this.currentShape = shapes.get(0);
         this.shapes = shapes;
         this.solutionList = solutionList;
+        this.executor = executor;
 
         for (int i = 0; i < currentShape.getMaxRotations(); i++) {
             TetrisBoardSolver solver = new TetrisBoardSolver(new TetrisBoard(currentBoard), currentShape.rclone(i),
-                    shapes, solutionList);
-            solver.start();
+                    shapes, solutionList, executor);
+            executor.submit(solver);
         }
     }
 
     public TetrisBoardSolver(TetrisBoard board, TetrisShape shape, ArrayList<TetrisShape> shapes,
-            List<TetrisBoard> solutionList) {
+            List<TetrisBoard> solutionList, ExecutorService executor) {
         this.currentBoard = board;
         this.currentShape = shape;
         this.shapes = shapes;
         this.solutionList = solutionList;
+        this.executor = executor;
     }
 
     @Override
@@ -42,13 +44,12 @@ public class TetrisBoardSolver extends Thread {
                 TetrisShape nextShape = this.shapes.get(currentShapeId + 1);
                 for (int i = 0; i < nextShape.getMaxRotations(); i++) {
                     TetrisBoardSolver childSolver = new TetrisBoardSolver(new TetrisBoard(currentBoard),
-                            nextShape.rclone(i), shapes, solutionList);
-                    childSolver.start();
+                            nextShape.rclone(i), shapes, solutionList, executor);
+                    executor.submit(childSolver);
                 }
             } else {
-                solutionFound.set(true);
                 solutionList.add(currentBoard);
-                //printArray(currentBoard.getBoard());
+                executor.shutdown();
                 return;
             }
         } else {

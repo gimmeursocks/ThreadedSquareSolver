@@ -190,24 +190,20 @@ public class Controller {
     }
 
     @FXML
-    void setValues(MouseEvent event) {
+    void setValues(MouseEvent event) throws InterruptedException {
         saveValues();
-        
-        if(toSolve.size() != 4){
+
+        if (toSolve.size() != 4) {
             Alert x = new Alert(Alert.AlertType.ERROR);
             x.setHeaderText(null);
             x.setContentText("Please choose 4 shapes only");
             x.show();
-        }
-        else{
+        } else {
             ThreadMaker tm = new ThreadMaker(toSolve);
-            try {
-                Thread.sleep(1000);
-                System.out.println("number of solutions " + tm.solutionList.size());
+            if (tm.solutionList.size() > 0) {
                 int[][] arr = tm.solutionList.get(0).getBoard();
                 setColorsForMatrix(arr);
-    
-            } catch (Exception e) {
+            } else {
                 Alert x = new Alert(Alert.AlertType.WARNING);
                 x.setHeaderText(null);
                 x.setContentText("No Solution found");
