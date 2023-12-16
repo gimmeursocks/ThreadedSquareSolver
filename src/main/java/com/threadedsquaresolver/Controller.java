@@ -119,16 +119,6 @@ public class Controller {
         return s;
     }
 
-    private void setDefaultValues() {
-        I_input.setText("0");
-        J_input.setText("0");
-        L_input.setText("0");
-        O_input.setText("0");
-        S_input.setText("0");
-        T_input.setText("0");
-        Z_input.setText("0");
-    }
-
     @FXML
     private Rectangle myrec;
 
@@ -193,6 +183,12 @@ public class Controller {
     void setValues(MouseEvent event) throws InterruptedException {
         saveValues();
 
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                rectangles[i][j].setFill(Color.WHITE);
+            }
+        }
+
         if (toSolve.size() != 4) {
             Alert x = new Alert(Alert.AlertType.ERROR);
             x.setHeaderText(null);
@@ -214,7 +210,6 @@ public class Controller {
 
     public void initialize() {
         solutionButton.setVisible(false);
-        setDefaultValues();
         setMinMaxValues(I_input);
         setMinMaxValues(J_input);
         setMinMaxValues(L_input);

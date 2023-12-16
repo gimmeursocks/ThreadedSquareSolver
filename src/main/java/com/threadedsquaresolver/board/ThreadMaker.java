@@ -17,6 +17,7 @@ public class ThreadMaker {
 
     public ThreadMaker(ArrayList<TetrisShape> shapes) throws InterruptedException {
         ArrayList<ArrayList<TetrisShape>> results = generateShapePermutations(shapes);
+        Collections.shuffle(results);
         solutionList = Collections.synchronizedList(new ArrayList<>());
         executor = Executors.newFixedThreadPool(noThreads);
 
